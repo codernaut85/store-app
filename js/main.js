@@ -56,6 +56,7 @@ storeApp.controller('productsController', function($scope) {
 
 });
 
+/* only show products that are in stock */
 storeApp.filter('filterInStock', function () {
   
   return function(products) {
