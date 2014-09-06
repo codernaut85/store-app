@@ -2,6 +2,6 @@
 
 <ul>
 	<li ng-repeat="product in products | filterInStock">
-		{{product.name}} - {{currency}}{{product.price}}
+		<a href="#products/{{product.id}}">{{product.name}}</a> - {{currency}}{{product.price}}
 	</li>
 </ul>
