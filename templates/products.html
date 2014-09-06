@@ -1,0 +1,7 @@
+<h1>{{title}}</h1>
+
+<ul>
+	<li ng-repeat="product in products | filterInStock">
+		{{product.name}} - {{currency}}{{product.price}}
+	</li>
+</ul>
