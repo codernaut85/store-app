@@ -17,13 +17,28 @@ storeApp.config(['$routeProvider',
       }).
       when('/products', {
         templateUrl: 'templates/products.html',
-        controller: 'productsController'
+        controller: 'productsController',
+        resolve: {
+          productsData: function (productsDataService) {
+              return productsDataService.getItems().
+                then(function (response) {
+                  return response.data;
+              });
+          }
+        }
       }).
       otherwise({
         redirectTo: '/'
       });
 }]);
  
+storeApp.factory('productsDataService', function ($http) {
+  return {
+      getItems: function () {
+          return $http.get('js/data.js');
+      }
+  };
+});
  
 storeApp.controller('homeController', function($scope) {
      
@@ -31,28 +46,11 @@ storeApp.controller('homeController', function($scope) {
     
 });
  
- 
-storeApp.controller('productsController', function($scope) {
- 
-    $scope.title = 'This is the products view';
+storeApp.controller('productsController', function($scope, productsData) {
 
-    $scope.products = [
-      {
-        "name" : "Alien",
-        "price" : "14.99",
-        "inStock" : true
-      },
-      {
-        "name" : "Blade Runner",
-        "price" : "13.99",
-        "inStock" : true
-      },
-      {
-        "name" : "2001: A Space Odyssey",
-        "price" : "11.99",
-        "inStock" : false
-      }
-    ];
+  $scope.title = 'This is the products view';
+
+  $scope.products = productsData.products;
 
 });
 
