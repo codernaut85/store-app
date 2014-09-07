@@ -329,3 +329,20 @@ li {
         page-break-after: avoid;
     }
 }
+
+.nav li {
+    float: left;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+
+
+/* filters */
+
+.filter {
+    padding: 20px 0;
+}

@@ -78,8 +78,10 @@ storeApp.controller('homeController', function($scope) {
 });
  
 storeApp.controller('productsController', function($scope, productsData) {
-  $scope.title = 'This is the products view';
+  $scope.title = 'Stock List';
   $scope.products = productsData.products;
+  $scope.predicate = 'name';
+  $scope.inStockFilterEnabled = true;
 });
 
 storeApp.controller('productController', ['$scope', '$routeParams', 'productsData', function($scope, $routeParams, productsData) {
@@ -101,14 +103,26 @@ storeApp.controller('productController', ['$scope', '$routeParams', 'productsDat
 /* only show products that are in stock */
 storeApp.filter('filterInStock', function () {
   
-  return function(products) {
-    var filtered = [];
+  return function(products, inStockFilterEnabled) {
+
+    if (inStockFilterEnabled) {
+      var filtered = [];
       for (var i = products.length - 1; i >= 0; i--) {
         if (products[i].inStock === true) {
           filtered.push(products[i]);
         };
       };
       return filtered;
+    } else {
+      return products;
     }
 
+  } 
+
 });
+
+
+
+
+
+

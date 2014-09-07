@@ -1,7 +1,9 @@
 <h1>{{title}}</h1>
 
+<div class="filter">Hide/show out of stock products <input type="checkbox" ng-model="inStockFilter"></div>
+
 <ul>
-	<li ng-repeat="product in products | filterInStock">
-		<a href="#products/{{product.id}}">{{product.name}}</a> - {{currency}}{{product.price}}
+	<li ng-repeat="product in products | filterInStock:inStockFilter | orderBy:predicate:reverse">
+		<a href="#products/{{product.id}}">{{product.name}}</a>
 	</li>
 </ul>
