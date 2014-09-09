@@ -13,11 +13,13 @@ storeApp.config(['$routeProvider',
     $routeProvider.
       when('/', {
         templateUrl: 'templates/home.html',
-        controller: 'homeController'
+        controller: 'homeController',
+        title: 'Home'
       }).
       when('/products', {
         templateUrl: 'templates/products.html',
         controller: 'productsController',
+        title: 'Products',
         resolve: {
           productsData: function (productsDataService) {
               return productsDataService.getProducts()
@@ -32,6 +34,7 @@ storeApp.config(['$routeProvider',
       when('/products/:id', {
         templateUrl: 'templates/product.html',
         controller: 'productController',
+        title: 'Product Details',
         resolve: {
           productsData: function (productsDataService) {
               return productsDataService.getProducts()
@@ -73,18 +76,19 @@ storeApp.factory('productsDataService', function ($http, $q) {
 
 
  
-storeApp.controller('homeController', function($scope) {
-    $scope.title = 'This is the home view';
+storeApp.controller('homeController', function($scope, $rootScope, $route) {
+    $rootScope.pageTitle = $route.current.title;
 });
  
-storeApp.controller('productsController', function($scope, productsData) {
+storeApp.controller('productsController', function($scope, $rootScope, $route, productsData) {
+  $rootScope.pageTitle = $route.current.title;
   $scope.title = 'Stock List';
   $scope.products = productsData.products;
   $scope.predicate = 'name';
   $scope.inStockFilterEnabled = true;
 });
 
-storeApp.controller('productController', ['$scope', '$routeParams', 'productsData', function($scope, $routeParams, productsData) {
+storeApp.controller('productController', function($scope, $rootScope, $route, $routeParams, productsData) {
 
     $scope.products = productsData.products;
 
@@ -98,7 +102,9 @@ storeApp.controller('productController', ['$scope', '$routeParams', 'productsDat
 
     $scope.product = $scope.getProductByID();
 
-}]);
+    $rootScope.pageTitle = $scope.product.name;
+
+});
 
 /* only show products that are in stock */
 storeApp.filter('filterInStock', function () {
@@ -120,8 +126,6 @@ storeApp.filter('filterInStock', function () {
   } 
 
 });
-
-
 
 
 
