@@ -204,7 +204,8 @@ storeApp.controller('productController', function($scope, $rootScope, $route, $r
     $scope.products = productsData.products;
 
     $scope.getProductByID = function () {
-      for (var i = $scope.products.length - 1; i >= 0; i--) {
+      var i = $scope.products.length - 1;
+      for (i; i >= 0; i--) {
         if ($scope.products[i].id === $routeParams.id) {
           return $scope.products[i];
         }
@@ -232,7 +233,8 @@ storeApp.controller('orderController', function($scope, $rootScope, $route, $rou
     $scope.orders = ordersData.orders;
 
     $scope.getOrderByID = function () {
-      for (var i = $scope.orders.length - 1; i >= 0; i--) {
+      var i = $scope.orders.length - 1;
+      for (i; i >= 0; i--) {
         if ($scope.orders[i].id === $routeParams.id) {
           return $scope.orders[i];
         }
@@ -242,8 +244,9 @@ storeApp.controller('orderController', function($scope, $rootScope, $route, $rou
     $scope.order = $scope.getOrderByID();
 
     $scope.orderTotal = function () {
-      var orderTotal = 0;
-      for (var i = $scope.order.items.length - 1; i >= 0; i--) {
+      var orderTotal = 0,
+          i = $scope.order.items.length - 1;
+      for (i; i >= 0; i--) {
         orderTotal += parseFloat($scope.order.items[i].price);
       };
       return orderTotal;
@@ -275,7 +278,8 @@ storeApp.controller('customerController', function($scope, $rootScope, $route, $
     $scope.customers = customersData.customers;
 
     $scope.getCustomerByID = function () {
-      for (var i = $scope.customers.length - 1; i >= 0; i--) {
+      var i = $scope.customers.length - 1;
+      for (i; i >= 0; i--) {
         if ($scope.customers[i].id === $routeParams.id) {
           return $scope.customers[i];
         }
@@ -304,8 +308,9 @@ storeApp.filter('filterInStock', function () {
   return function(products, inStockFilterEnabled) {
 
     if (inStockFilterEnabled) {
-      var filtered = [];
-      for (var i = products.length - 1; i >= 0; i--) {
+      var filtered = [],
+          i = products.length - 1;
+      for (i; i >= 0; i--) {
         if (products[i].inStock === true) {
           filtered.push(products[i]);
         };
