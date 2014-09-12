@@ -334,6 +334,10 @@ li {
     float: left;
 }
 
+.nav li:first-child a {
+    padding-left: 0;
+}
+
 img {
     max-width: 100%;
 }
@@ -345,4 +349,14 @@ img {
 
 .filter {
     padding: 20px 0;
+}
+
+
+
+
+
+
+.table td:last-child, 
+.table th:last-child {
+    text-align: right;
 }

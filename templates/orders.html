@@ -1,0 +1,7 @@
+<h1>{{title}}</h1>
+
+<ul>
+	<li ng-repeat="order in orders | orderBy:predicate:reverse">
+		<a href="#orders/{{order.id}}">{{order.id}}</a>
+	</li>
+</ul>

@@ -1,0 +1,45 @@
+
+<h1>Order data for order: {{order.id}}</h1>
+
+<h2>Order Summary</h2>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Customer</th>
+			<th>Order Date</th>
+			<th>Fulfilled</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{order.id}}</td>
+			<td><a href="#customers/{{order.customer}}">{{order.customer}}</a></td>
+			<td>{{order.orderDate | date:'dd-MM-yyyy'}}</td>
+			<td>{{order.fulfilledDate | date:'dd-MM-yyyy'}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Order Details</h2>
+<table class="table table-striped table-order-details">
+	<thead>
+		<tr>
+			<th>Item ID</th>
+			<th>Item Name</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="item in order.items">
+			<td><a href="#/products/{{item.id}}">{{item.id}}</a></td>
+			<td>{{item.name}}</td>
+			<td>{{currency}}{{item.price}}</td>
+		</tr>
+		<tr>
+			<td></dt>
+			<td></td>
+			<td>Total: {{currency}}{{orderTotal()}}</td>
+		</tr>
+	</tbody>
+</table>

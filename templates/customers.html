@@ -1,0 +1,7 @@
+<h1>{{title}}</h1>
+
+<ul>
+	<li ng-repeat="customer in customers | orderBy:predicate:reverse">
+		<a href="#customers/{{customer.id}}">{{customer.firstName}} {{customer.lastName}}</a>
+	</li>
+</ul>
